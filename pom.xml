@@ -5,8 +5,14 @@
     <groupId>cn.swunlp</groupId>
     <artifactId>backend-base</artifactId>
     <version>0.0.1-Alpha</version>
+    <packaging>pom</packaging>
     <name>backend-base</name>
     <description>后端基础工程</description>
+
+    <modules>
+        <module>backend-base-web</module>
+        <module>backend-base-data</module>
+    </modules>
 
     <properties>
         <java.version>17</java.version>
