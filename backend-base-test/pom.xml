@@ -3,35 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>cn.swunlp</groupId>
         <artifactId>backend-base</artifactId>
         <version>0.0.1-Alpha</version>
     </parent>
 
-    <groupId>cn.swunlp.backend.base</groupId>
-    <artifactId>backend-base-web</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>backend-base-test</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <backend.base.version>0.0.1-Alpha</backend.base.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>cn.swunlp.backend.base</groupId>
-            <artifactId>backend-base-base</artifactId>
-            <version>${backend.base.version}</version>
+            <artifactId>backend-base-web</artifactId>
+            <version>0.0.1-Alpha</version>
         </dependency>
-
     </dependencies>
 
 </project>

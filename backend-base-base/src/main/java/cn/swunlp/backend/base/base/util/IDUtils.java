@@ -1,4 +1,4 @@
-package cn.swunlp.backend.base.util;
+package cn.swunlp.backend.base.base.util;
 
 import java.util.UUID;
 

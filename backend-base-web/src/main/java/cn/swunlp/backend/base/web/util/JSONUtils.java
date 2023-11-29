@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
  * @author TangXi
  * @date 2021/10/29 下午10:38
  */
-public class JSONUtil {
+public class JSONUtils {
 
 	private static final ObjectMapper OP = new ObjectMapper();
 
-	private JSONUtil(){}
+	private JSONUtils(){}
 
 	@SneakyThrows
 	public static String toJson(Object object){

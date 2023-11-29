@@ -1,4 +1,4 @@
-package cn.swunlp.backend.base.exception;
+package cn.swunlp.backend.base.base.exception;
 
 /**
  * 功能描述:

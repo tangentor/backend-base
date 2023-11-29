@@ -12,6 +12,8 @@
     <modules>
         <module>backend-base-web</module>
         <module>backend-base-data</module>
+        <module>backend-base-test</module>
+        <module>backend-base-base</module>
     </modules>
 
     <properties>
@@ -68,7 +70,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>cn.swunlp.backend.base.BackendBaseApplication</mainClass>
+                    <mainClass>swunlp.backend.base.base.BackendBaseApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

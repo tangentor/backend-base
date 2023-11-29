@@ -1,7 +1,7 @@
 package cn.swunlp.backend.base.web.advice;
 
 import cn.swunlp.backend.base.web.entity.Result;
-import cn.swunlp.backend.base.web.util.JSONUtil;
+import cn.swunlp.backend.base.web.util.JSONUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -53,11 +53,12 @@ public class JsonResultHandler implements ResponseBodyAdvice<Object> {
 	 */
 	@Override
 	public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+		System.out.println(body);
 		if (body instanceof Result) {
 			return body;
 		}
 		if (body instanceof String) {
-			return JSONUtil.toJson(Result.adjust(body));
+			return JSONUtils.toJson(Result.adjust(body));
 		}
 		return Result.adjust(body);
 	}
