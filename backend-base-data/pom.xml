@@ -10,7 +10,6 @@
         <version>0.0.1-Alpha</version>
     </parent>
 
-    <groupId>cn.swunlp.backend.base</groupId>
     <artifactId>backend-base-data</artifactId>
 
     <properties>
@@ -19,4 +18,31 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- Mybatis-Plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.4</version>
+        </dependency>
+        <!-- Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- 动态数据源 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.2.20</version>
+        </dependency>
+
+
+    </dependencies>
 </project>
