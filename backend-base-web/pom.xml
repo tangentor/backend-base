@@ -10,7 +10,6 @@
         <version>0.0.1-Alpha</version>
     </parent>
 
-    <groupId>cn.swunlp.backend.base</groupId>
     <artifactId>backend-base-web</artifactId>
 
     <properties>
