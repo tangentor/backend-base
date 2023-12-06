@@ -6,10 +6,11 @@
     <parent>
         <groupId>cn.swunlp</groupId>
         <artifactId>backend-base</artifactId>
-        <version>0.0.1-Alpha</version>
+        <version>${revision}</version>
     </parent>
 
-    <artifactId>backend-base-test</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>test</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
