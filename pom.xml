@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.swunlp</groupId>
     <artifactId>backend-base</artifactId>
-    <version>0.0.1-Alpha</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>backend-base</name>
     <description>后端基础工程</description>
@@ -12,14 +12,15 @@
     <modules>
         <module>backend-base-web</module>
         <module>backend-base-data</module>
-        <module>backend-base-test</module>
         <module>backend-base-base</module>
+        <module>test</module>
     </modules>
 
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <revision>0.0.1-Alpha</revision>
         <spring-boot.version>3.0.2</spring-boot.version>
     </properties>
 
@@ -27,20 +28,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
 
     </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -49,6 +50,40 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.swunlp</groupId>
+                <artifactId>backend-base-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.swunlp</groupId>
+                <artifactId>backend-base-data</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!-- Mybatis-Plus-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.5.4.1</version>
+            </dependency>
+            <!-- Mybatis-Flex-->
+            <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-spring-boot-starter</artifactId>
+                <version>1.7.5</version>
+            </dependency>
+            <!-- 动态数据源 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+                <version>4.2.0</version>
+            </dependency>
+            <!-- druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.2.20</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -69,9 +104,32 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.1.0</version>
                 <configuration>
-                    <mainClass>swunlp.backend.base.base.BackendBaseApplication</mainClass>
+                    <!-- 是否更新pom文件，此处还有更高级的用法 -->
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

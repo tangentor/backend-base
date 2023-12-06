@@ -7,23 +7,17 @@
     <parent>
         <groupId>cn.swunlp</groupId>
         <artifactId>backend-base</artifactId>
-        <version>0.0.1-Alpha</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>backend-base-data</artifactId>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <!-- Mybatis-Plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.4</version>
         </dependency>
         <!-- Redis -->
         <dependency>
@@ -34,13 +28,6 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
-            <version>4.2.0</version>
-        </dependency>
-        <!-- druid -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.20</version>
         </dependency>
 
 
