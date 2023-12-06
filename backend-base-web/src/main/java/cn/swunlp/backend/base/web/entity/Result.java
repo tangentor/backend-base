@@ -82,7 +82,7 @@ public class Result<T> {
             return error(ResultCode.BUSINESS_ERROR,"对象为空");
         }
         if(data instanceof List){
-            if(((List<?>) data).size() == 0){
+            if(((List<?>) data).isEmpty()){
                 return error(ResultCode.BUSINESS_ERROR,"数据为空");
             }
         }
