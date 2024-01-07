@@ -1,6 +1,6 @@
-package cache;
+package cn.swunlp.backend.base.data.cache;
 
-import constant.CacheConst;
+import cn.swunlp.backend.base.data.constant.CacheConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 

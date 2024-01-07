@@ -1,4 +1,4 @@
-package constant;
+package cn.swunlp.backend.base.data.constant;
 
 /**
  * 缓存相关常量

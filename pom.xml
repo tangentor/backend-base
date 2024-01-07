@@ -13,15 +13,20 @@
         <module>backend-base-web</module>
         <module>backend-base-data</module>
         <module>backend-base-base</module>
-        <module>test</module>
     </modules>
 
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <revision>0.0.1-Alpha</revision>
+        <revision>0.0.2-Alpha</revision>
         <spring-boot.version>3.0.2</spring-boot.version>
+        <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
+        <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <knife4j.version>4.3.0</knife4j.version>
+        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+        <mybatis-flex.version>1.7.5</mybatis-flex.version>
+        <dynamic-datasource.version>4.2.0</dynamic-datasource.version>
     </properties>
 
     <dependencies>
@@ -45,9 +50,23 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -65,19 +84,24 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.5.4.1</version>
+                <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- Mybatis-Flex-->
             <dependency>
                 <groupId>com.mybatis-flex</groupId>
                 <artifactId>mybatis-flex-spring-boot-starter</artifactId>
-                <version>1.7.5</version>
+                <version>${mybatis-flex.version}</version>
             </dependency>
             <!-- 动态数据源 -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
-                <version>4.2.0</version>
+                <version>${dynamic-datasource.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
             <!-- druid -->
             <dependency>
