@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cn.swunlp</groupId>
   <artifactId>backend-base</artifactId>
-  <version>0.0.2-Alpha</version>
+  <version>0.0.3-Alpha</version>
   <packaging>pom</packaging>
   <name>backend-base</name>
   <description>后端基础工程</description>
@@ -12,6 +12,7 @@
     <module>backend-base-web</module>
     <module>backend-base-data</module>
     <module>backend-base-base</module>
+    <module>backend-base-security</module>
   </modules>
   <properties>
     <spring-boot.version>3.0.2</spring-boot.version>
@@ -22,7 +23,7 @@
     <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
     <knife4j.version>4.3.0</knife4j.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <revision>0.0.2-Alpha</revision>
+    <revision>0.0.3-Alpha</revision>
     <dynamic-datasource.version>4.2.0</dynamic-datasource.version>
     <mybatis-flex.version>1.7.5</mybatis-flex.version>
   </properties>
@@ -52,12 +53,17 @@
       <dependency>
         <groupId>cn.swunlp</groupId>
         <artifactId>backend-base-web</artifactId>
-        <version>0.0.2-Alpha</version>
+        <version>0.0.3-Alpha</version>
       </dependency>
       <dependency>
         <groupId>cn.swunlp</groupId>
         <artifactId>backend-base-data</artifactId>
-        <version>0.0.2-Alpha</version>
+        <version>0.0.3-Alpha</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.swunlp</groupId>
+        <artifactId>backend-base-security</artifactId>
+        <version>0.0.3-Alpha</version>
       </dependency>
       <dependency>
         <groupId>com.baomidou</groupId>
