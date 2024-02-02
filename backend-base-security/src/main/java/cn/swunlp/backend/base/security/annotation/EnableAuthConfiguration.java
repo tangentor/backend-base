@@ -20,4 +20,6 @@ public @interface EnableAuthConfiguration {
     String value() default "true";
 
     String isEnable() default "true";
+
+    boolean debug() default false;
 }

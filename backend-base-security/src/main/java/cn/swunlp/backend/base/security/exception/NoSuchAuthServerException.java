@@ -4,11 +4,11 @@ import cn.swunlp.backend.base.base.exception.BusinessException;
 
 /**
  * @author TangXi
- * @since 2024/1/30
+ * @since 2024/2/1
  */
 
-public class AppRegisterException extends BusinessException {
-    public AppRegisterException(String msg) {
+public class NoSuchAuthServerException extends BusinessException {
+    public NoSuchAuthServerException(String msg) {
         super(msg);
     }
 }

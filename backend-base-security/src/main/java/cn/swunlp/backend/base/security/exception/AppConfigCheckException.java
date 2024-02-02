@@ -11,5 +11,4 @@ public class AppConfigCheckException extends BusinessException {
     public AppConfigCheckException(String msg) {
         super(msg);
     }
-    // Your class implementation goes here
 }

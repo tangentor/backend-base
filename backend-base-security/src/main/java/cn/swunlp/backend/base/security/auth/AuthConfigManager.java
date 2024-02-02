@@ -12,6 +12,7 @@ import cn.swunlp.backend.base.security.exception.AppConfigCheckException;
 import cn.swunlp.backend.base.security.strategy.AuthStrategy;
 import cn.swunlp.backend.base.security.util.IgnorePathLoader;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
@@ -28,6 +29,7 @@ import java.util.logging.Logger;
 
 /**
  * 动态获取所有接口的权限配置
+ *
  * @author TangXi
  * @since 2024/1/29
  */
@@ -51,12 +53,20 @@ public class AuthConfigManager implements ApplicationRunner {
      */
     private final List<MethodPermission> methodPermissions = new ArrayList<>();
 
+    /**
+     * 应用前缀
+     */
+    @Value("${server.servlet.context-path:/}")
+    private String prefix;
 
-//    private final AuthServiceClient authServiceClient;
+    private boolean enableDebug = false;
+
+
+    private final AuthConfigRegister authConfigRegister;
 
     @Override
     public void run(ApplicationArguments args) {
-        if(!checkIsEnable()){
+        if (!checkIsEnable()) {
             return;
         }
         logger.info("检查应用配置参数...");
@@ -79,35 +89,39 @@ public class AuthConfigManager implements ApplicationRunner {
     private void setBaseApplicationConfig() {
         applicationPermission.setApplicationName(appConfigProperties.getName());
         applicationPermission.setApplicationCode(appConfigProperties.getCode());
+        applicationPermission.setPrefix(prefix);
     }
 
     private boolean checkIsEnable() {
         Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(Configuration.class);
         for (Map.Entry<String, Object> entry : beansWithAnnotation.entrySet()) {
-                // 除了自己定义的配置类，还有一些spring自带的配置类，这里过滤掉
-                if(entry.getKey().contains(".")){
-                    continue;
-                }
-                if(ReflectUtils.isAnnotated(entry.getValue(), EnableAuthConfiguration.class)){
-                    return true;
-                }
+            // 除了自己定义的配置类，还有一些spring自带的配置类，这里过滤掉
+            if (entry.getKey().contains(".")) {
+                continue;
+            }
+            EnableAuthConfiguration annotation = ReflectUtils.findAnnotation(entry.getValue(), EnableAuthConfiguration.class);
+            if (annotation != null) {
+                enableDebug = annotation.debug();
+                return true;
+            }
         }
         return false;
     }
 
     private void doRegister(ApplicationPermission applicationPermission) {
-        System.out.println("该应用的应用权限如下：");
-        System.out.println("应用名称：" + applicationPermission.getApplicationName());
-        System.out.println("应用代码：" + applicationPermission.getApplicationCode());
-        System.out.println("应用权限信息：");
+        if(enableDebug){
+            printRegisterInfo(applicationPermission);
+        }
+        authConfigRegister.doRegister(applicationPermission);
+    }
+
+    private void printRegisterInfo(ApplicationPermission applicationPermission) {
+        logger.info("该应用的应用权限如下：");
+        logger.info("应用名称：" + applicationPermission.getApplicationName());
+        logger.info("应用代码：" + applicationPermission.getApplicationCode());
+        logger.info("应用前缀：" + applicationPermission.getPrefix());
+        logger.info("应用权限信息：");
         applicationPermission.getMethodPermissions().forEach(System.out::println);
-//        AppRegisterResult res = authServiceClient.doRegister(applicationPermission);
-//        if (AppRegisterResult.SUCCESS.equals(res)) {
-//            logger.info("注册成功");
-//        } else {
-//            logger.info("注册失败");
-//            throw new AppRegisterException("应用注册失败: " + res.getName() );
-//        }
     }
 
     /**
@@ -117,7 +131,7 @@ public class AuthConfigManager implements ApplicationRunner {
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = handlerMapping.getHandlerMethods();
         //遍历映射关系
         handlerMethods.forEach(this::loadMapperInfo);
-        System.out.println(handlerMethods);
+        logger.info(handlerMethods.toString());
         //将权限信息添加到应用权限中
         applicationPermission.setMethodPermissions(methodPermissions);
     }
@@ -132,7 +146,7 @@ public class AuthConfigManager implements ApplicationRunner {
         for (String directPath : paths) {
             Set<RequestMethod> requestMethods = requestMappingInfo.getMethodsCondition().getMethods();
             // 使用的是RequestMapping注解，没有指定请求方法，那么默认支持所有请求方法
-            if(requestMethods.isEmpty()){
+            if (requestMethods.isEmpty()) {
                 requestMethods = setAllRequestMethod();
             }
             for (RequestMethod requestMethod : requestMethods) {
@@ -143,18 +157,18 @@ public class AuthConfigManager implements ApplicationRunner {
                 Method method = handlerMethod.getMethod();
                 MethodPermission methodPermission = new MethodPermission();
                 methodPermission.setUri(directPath);
-                methodPermission.setRequestMethod(requestMethod);
+                methodPermission.setRequestMethod(requestMethod.name());
                 // 方法的全路径名
                 methodPermission.setMethodName(method.getName());
-                methodPermission.setHandler(handlerMethod);
-                this.parsePermission(method,methodPermission);
+//                methodPermission.setHandler(handlerMethod);
+                this.parsePermission(method, methodPermission);
                 methodPermissions.add(methodPermission);
             }
         }
     }
 
     private Set<RequestMethod> setAllRequestMethod() {
-        return Set.of(RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE);
+        return Set.of(RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE);
     }
 
     private void parsePermission(Method method, MethodPermission methodPermission) {
@@ -191,7 +205,6 @@ public class AuthConfigManager implements ApplicationRunner {
         methodPermission.setAllowedOrigins(requireAuth.allowedOrigins());
         methodPermission.setInternalSource(requireAuth.isInternalSource());
     }
-
 
 
     /**

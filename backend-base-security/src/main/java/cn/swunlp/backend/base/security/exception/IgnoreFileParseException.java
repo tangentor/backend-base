@@ -11,5 +11,4 @@ public class IgnoreFileParseException extends BusinessException {
     public IgnoreFileParseException(String msg) {
         super(msg);
     }
-    // Your class implementation goes here
 }

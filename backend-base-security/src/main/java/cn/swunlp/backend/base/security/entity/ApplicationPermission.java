@@ -1,5 +1,6 @@
 package cn.swunlp.backend.base.security.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 import java.util.List;
@@ -21,6 +22,11 @@ public class ApplicationPermission {
      * 应用代码
      */
     private String applicationCode;
+
+    /**
+     * 应用接口前缀
+     */
+    private String  prefix;
 
     /**
      * 方法权限

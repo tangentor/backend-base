@@ -78,6 +78,24 @@ public class ReflectUtils {
                 annotationType.equals(Inherited.class);
     }
 
+    public static <A extends Annotation> A findAnnotation(Object object, Class<A> annotationClass) {
+        Class<?> clazz = object.getClass();
+        if(clazz.getName().contains(SPRING_CGLIB_FLAG)){
+            clazz = clazz.getSuperclass();
+        }
+        A annotation = clazz.getAnnotation(annotationClass);
+        if (annotation != null) {
+            return annotation;
+        }
+        for (Annotation anno : clazz.getAnnotations()) {
+            A target = findAnnotation(anno, annotationClass);
+            if(target != null){
+                return target;
+            }
+        }
+        return null;
+    }
+
     public static <A extends Annotation> A findAnnotation(Method method, Class<A> annotationClass) {
         //方法上查找
         A annotation = method.getAnnotation(annotationClass);

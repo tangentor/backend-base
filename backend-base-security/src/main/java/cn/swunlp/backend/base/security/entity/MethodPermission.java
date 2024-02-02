@@ -1,7 +1,6 @@
 package cn.swunlp.backend.base.security.entity;
 
 import lombok.Data;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * 方法权限信息
@@ -25,7 +24,11 @@ public class MethodPermission {
     /**
      * 请求方法
      */
-    private RequestMethod requestMethod;
+//    @JsonSerialize(converter = RequestMethodConverter.class)
+//    @JsonDeserialize(converter = RequestMethodConverter.class)
+//    private RequestMethod requestMethod;
+
+    private String requestMethod;
 
     /**
      * 合法请求来源
@@ -40,7 +43,7 @@ public class MethodPermission {
     /**
      * 方法的句柄
      */
-    private Object handler;
+//    private Object handler;
 
     /**
      * 所需要的权限信息

@@ -1,6 +1,6 @@
 package cn.swunlp.backend.base.security.entity;
 
-import lombok.Data;
+import lombok.Builder;
 import lombok.Setter;
 
 /**
@@ -10,6 +10,7 @@ import lombok.Setter;
  */
 
 @Setter
+@Builder
 public class AuthenticatedUserProfile {
 
     /**

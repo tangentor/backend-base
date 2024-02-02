@@ -11,5 +11,4 @@ public class StrategyParseException extends BusinessException {
     public StrategyParseException(String msg) {
         super(msg);
     }
-    // Your class implementation goes here
 }
