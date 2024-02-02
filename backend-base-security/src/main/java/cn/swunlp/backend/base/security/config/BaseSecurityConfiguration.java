@@ -5,17 +5,18 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author TangXi
  * @since 2024/1/30
  */
 @Configuration
+@EnableScheduling
 @ComponentScan(basePackages = "cn.swunlp.backend.base.security")
 public class BaseSecurityConfiguration {
-
     @Bean
-    public AccessControlInterceptor accessControlInterceptor() {
-        return new AccessControlInterceptor();
+    public AccessControlInterceptor accessControlInterceptor(AccessControlProperties accessControlProperties) {
+        return new AccessControlInterceptor(accessControlProperties);
     }
 }

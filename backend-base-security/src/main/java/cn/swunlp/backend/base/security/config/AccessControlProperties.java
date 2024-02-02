@@ -19,5 +19,5 @@ public class AccessControlProperties {
 
     private String header = "X-Access-Control";
 
-    private String validValue = "OK!";
+    private String validValue;
 }

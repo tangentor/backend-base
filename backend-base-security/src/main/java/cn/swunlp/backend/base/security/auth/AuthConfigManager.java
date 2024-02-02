@@ -109,20 +109,9 @@ public class AuthConfigManager implements ApplicationRunner {
     }
 
     private void doRegister(ApplicationPermission applicationPermission) {
-        if(enableDebug){
-            printRegisterInfo(applicationPermission);
-        }
-        authConfigRegister.doRegister(applicationPermission);
+        authConfigRegister.doRegister(applicationPermission,enableDebug);
     }
 
-    private void printRegisterInfo(ApplicationPermission applicationPermission) {
-        logger.info("该应用的应用权限如下：");
-        logger.info("应用名称：" + applicationPermission.getApplicationName());
-        logger.info("应用代码：" + applicationPermission.getApplicationCode());
-        logger.info("应用前缀：" + applicationPermission.getPrefix());
-        logger.info("应用权限信息：");
-        applicationPermission.getMethodPermissions().forEach(System.out::println);
-    }
 
     /**
      * 解析方法权限
