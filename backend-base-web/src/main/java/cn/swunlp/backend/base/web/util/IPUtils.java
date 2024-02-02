@@ -16,7 +16,7 @@ public class IPUtils {
 
     /**
      * 获取ip
-     * @param request
+     * @param request 请求
      */
     public static String getIp(HttpServletRequest request) {
         String ipAddress = null;

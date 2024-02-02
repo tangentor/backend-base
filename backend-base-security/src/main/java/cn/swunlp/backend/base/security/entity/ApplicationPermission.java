@@ -29,6 +29,11 @@ public class ApplicationPermission {
     private String  prefix;
 
     /**
+     * 应用访问控制
+     */
+    private AppAccessControl appAccessControl;
+
+    /**
      * 方法权限
      */
     private List<MethodPermission> methodPermissions;
