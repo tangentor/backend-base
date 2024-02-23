@@ -32,4 +32,14 @@ public class AuthResult {
      * 当鉴权成功后保存的昵称
      */
     private String nickname;
+
+    /**
+     * 访问所需要的头部
+     */
+    private String accessHeader;
+
+    /**
+     * 访问所需要的值
+     */
+    private String accessValue;
 }

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cn.swunlp</groupId>
   <artifactId>backend-base</artifactId>
-  <version>0.0.3-Alpha</version>
+  <version>0.0.4-Alpha</version>
   <packaging>pom</packaging>
   <name>backend-base</name>
   <description>后端基础工程</description>
@@ -23,7 +23,7 @@
     <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
     <knife4j.version>4.3.0</knife4j.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <revision>0.0.3-Alpha</revision>
+    <revision>0.0.4-Alpha</revision>
     <dynamic-datasource.version>4.2.0</dynamic-datasource.version>
     <mybatis-flex.version>1.7.5</mybatis-flex.version>
   </properties>
@@ -53,17 +53,17 @@
       <dependency>
         <groupId>cn.swunlp</groupId>
         <artifactId>backend-base-web</artifactId>
-        <version>0.0.3-Alpha</version>
+        <version>0.0.4-Alpha</version>
       </dependency>
       <dependency>
         <groupId>cn.swunlp</groupId>
         <artifactId>backend-base-data</artifactId>
-        <version>0.0.3-Alpha</version>
+        <version>0.0.4-Alpha</version>
       </dependency>
       <dependency>
         <groupId>cn.swunlp</groupId>
         <artifactId>backend-base-security</artifactId>
-        <version>0.0.3-Alpha</version>
+        <version>0.0.4-Alpha</version>
       </dependency>
       <dependency>
         <groupId>com.baomidou</groupId>
@@ -147,6 +147,19 @@
           <updatePomFile>true</updatePomFile>
           <flattenMode>resolveCiFriendliesOnly</flattenMode>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

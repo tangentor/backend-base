@@ -2,8 +2,11 @@ package cn.swunlp.backend.base.data.cache;
 
 import cn.swunlp.backend.base.data.constant.CacheConst;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +36,27 @@ public abstract class BaseCache<T> {
 
     protected String getKey() {
         return ROOT_KEY + domain();
+    }
+
+
+    /**
+     * 获取所有的key
+     * @return 所有的key
+     */
+    public List<String> keys() {
+        // 每次迭代获取的键数量，数字越大性能越好，但更容易造成阻塞
+        String pattern = getKey() + ":*";
+        List<String> keys = new ArrayList<>();
+        try (Cursor<String> cursor = this.redisTemplate.scan(ScanOptions.scanOptions()
+                .match(pattern)
+                .count(100)
+                .build())) {
+            while (cursor.hasNext()) {
+                String key = cursor.next();
+                keys.add(key);
+            }
+        }
+        return keys;
     }
 
     /**

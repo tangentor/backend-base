@@ -100,7 +100,7 @@ public class AuthConfigManager implements ApplicationRunner {
                 continue;
             }
             EnableAuthConfiguration annotation = ReflectUtils.findAnnotation(entry.getValue(), EnableAuthConfiguration.class);
-            if (annotation != null) {
+            if (annotation != null && ("true".equals(annotation.isEnable()) || "true".equals(annotation.value()))) {
                 enableDebug = annotation.debug();
                 return true;
             }
@@ -165,6 +165,7 @@ public class AuthConfigManager implements ApplicationRunner {
         if (ReflectUtils.isAnnotated(method, NotRequireAuth.class)) {
             // 设置权限为不需要认证
             methodPermission.setPermissions(new String[]{AppAuthenticate.NOT_REQUIRED});
+            methodPermission.setRoles(new String[]{AppAuthenticate.NOT_REQUIRED});
             return;
         }
         // 解析Auth注解信息
@@ -188,7 +189,11 @@ public class AuthConfigManager implements ApplicationRunner {
     }
 
     private void setMethodPermission(MethodPermission methodPermission, RequireAuth requireAuth) {
-        methodPermission.setPermissions(requireAuth.permissions());
+        if(requireAuth.value().length > 0){
+            methodPermission.setPermissions(requireAuth.value());
+        } else {
+            methodPermission.setPermissions(requireAuth.permissions());
+        }
         methodPermission.setRoles(requireAuth.roles());
         methodPermission.setRequireAll(requireAuth.requireAll());
         methodPermission.setAllowedOrigins(requireAuth.allowedOrigins());

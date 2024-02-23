@@ -24,9 +24,6 @@ public class MethodPermission {
     /**
      * 请求方法
      */
-//    @JsonSerialize(converter = RequestMethodConverter.class)
-//    @JsonDeserialize(converter = RequestMethodConverter.class)
-//    private RequestMethod requestMethod;
 
     private String requestMethod;
 
@@ -40,10 +37,6 @@ public class MethodPermission {
      */
     private boolean isInternalSource;
 
-    /**
-     * 方法的句柄
-     */
-//    private Object handler;
 
     /**
      * 所需要的权限信息

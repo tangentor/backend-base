@@ -5,7 +5,6 @@ import cn.swunlp.backend.base.security.config.AccessControlProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -23,16 +22,15 @@ public class AccessControlInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("accessControl = " + accessControl);
         // 判断请求的方法是否符合要求
         if(!accessControl.isEnable()){
             return true;
         }
         // 检查请求头是否符合要求
         String value = AccessControlValueHolder.getValue();
+        String lastValue = AccessControlValueHolder.getLastValue();
         String checkValue = request.getHeader(accessControl.getHeader());
-        System.out.println("checkValue = " + checkValue);
-        if(!StringUtils.hasText(value) || !value.equals(checkValue)){
+        if(!StringUtils.hasText(value) || !value.equals(checkValue) || !checkValue.equals(lastValue)){
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied, The Application Enable Access Control!");
             return false;
         }

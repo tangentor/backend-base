@@ -79,6 +79,9 @@ public class AuthConfigRegister {
      */
     @Scheduled(fixedRate = 20000,initialDelay = 10000)
     void doHeartbeat() {
+        if(applicationPermission == null){
+            return;
+        }
         logger.info("开始发送心跳包");
         doRegister(applicationPermission,enableDebug);
     }

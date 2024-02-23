@@ -5,11 +5,11 @@
   <parent>
     <groupId>cn.swunlp</groupId>
     <artifactId>backend-base</artifactId>
-    <version>0.0.3-Alpha</version>
+    <version>0.0.4-Alpha</version>
   </parent>
   <groupId>cn.swunlp</groupId>
   <artifactId>backend-base-security</artifactId>
-  <version>0.0.3-Alpha</version>
+  <version>0.0.4-Alpha</version>
   <dependencies>
     <dependency>
       <groupId>cn.swunlp</groupId>
