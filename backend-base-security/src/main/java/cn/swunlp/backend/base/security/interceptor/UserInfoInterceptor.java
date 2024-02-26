@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 /**
  * 访问控制拦截器
  * @author TangXi
@@ -37,7 +40,9 @@ public class UserInfoInterceptor implements HandlerInterceptor {
             response.getWriter().write("用户信息格式错误");
             return false;
         }
-        UserInfoUtils.setUserInfo(info[0], info[1]);
+        String username = URLDecoder.decode(info[0], StandardCharsets.UTF_8);
+        String nickname = URLDecoder.decode(info[1], StandardCharsets.UTF_8);
+        UserInfoUtils.setUserInfo(username, nickname);
         return true;
     }
 }
